@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://ftu7pwhic3e0"]
+
+[ext_resource type="ArrayMesh" uid="uid://cx3ifjn71vfva" path="res://models/cube.obj" id="1_b3wd0"]
+[ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="1_d6f2s"]
+[ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_jk80a"]
+[ext_resource type="Material" path="res://materials/simple_blue.tres" id="2_5tyck"]
+[ext_resource type="Script" path="res://scripts/tile.gd" id="2_dce16"]
+[ext_resource type="Material" uid="uid://cea11se2jmcfh" path="res://materials/simple_black.tres" id="2_j5vto"]
+[ext_resource type="Script" path="res://scripts/control.gd" id="2_o48t3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qu3yu"]
+size = Vector3(1, 0.133667, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i1wnd"]
+
+[node name="main_scene" type="Node3D"]
+script = ExtResource("1_jk80a")
+
+[node name="control" type="Node3D" parent="."]
+script = ExtResource("2_o48t3")
+
+[node name="camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.722967, 0.690882, 0, -0.690882, 0.722967, 0, 9.97057, 11.2735)
+fov = 20.0
+
+[node name="board" type="Node3D" parent="."]
+
+[node name="tilemap" type="Node3D" parent="board"]
+
+[node name="tile" type="StaticBody3D" parent="board/tilemap"]
+script = ExtResource("2_dce16")
+
+[node name="mesh" type="MeshInstance3D" parent="board/tilemap/tile"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
+mesh = ExtResource("1_d6f2s")
+surface_material_override/0 = ExtResource("2_5tyck")
+
+[node name="collider" type="CollisionShape3D" parent="board/tilemap/tile"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_qu3yu")
+
+[node name="static_world" type="Node3D" parent="."]
+
+[node name="ground" type="StaticBody3D" parent="static_world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="collider" type="CollisionShape3D" parent="static_world/ground"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -50, 0)
+shape = SubResource("BoxShape3D_i1wnd")
+
+[node name="mesh" type="MeshInstance3D" parent="static_world/ground"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -1, 0)
+mesh = ExtResource("1_b3wd0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("2_j5vto")
+
+[node name="light" type="Node3D" parent="static_world"]
+
+[node name="directonal_light" type="DirectionalLight3D" parent="static_world/light"]
+transform = Transform3D(0.753024, -0.41596, 0.509836, 1.5628e-08, 0.774834, 0.632165, -0.657993, -0.476035, 0.583469, 5.68445, 1.28105, 4.20563)
