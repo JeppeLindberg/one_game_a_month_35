@@ -1,0 +1,97 @@
+{
+	"connections": [
+		{
+			"from": "text",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 7
+		},
+		{
+			"from": "uniform",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 0
+		}
+	],
+	"label": "Graph",
+	"longdesc": "",
+	"name": "1341",
+	"node_position": {
+		"x": 0,
+		"y": 0
+	},
+	"nodes": [
+		{
+			"export_last_target": "Godot/Godot 4 ORM",
+			"export_paths": {
+				"Godot/Godot 4 ORM": "C:/Users/jeppe/Documents/Godot/v4/one_game_a_month_35/materials/simple_text"
+			},
+			"name": "Material",
+			"node_position": {
+				"x": 554,
+				"y": 76
+			},
+			"parameters": {
+				"albedo_color": {
+					"a": 1,
+					"b": 1,
+					"g": 1,
+					"r": 1,
+					"type": "Color"
+				},
+				"ao": 1,
+				"depth_scale": 0.5,
+				"emission_energy": 1,
+				"flags_transparent": true,
+				"metallic": 0,
+				"normal": 1,
+				"roughness": 1,
+				"size": 11,
+				"sss": 1
+			},
+			"seed_int": 0,
+			"type": "material"
+		},
+		{
+			"name": "text",
+			"node_position": {
+				"x": -248,
+				"y": 96.5
+			},
+			"parameters": {
+				"center": false,
+				"font": "",
+				"font_size": 104,
+				"text": "Text",
+				"x": -0.4,
+				"y": -0.4
+			},
+			"seed_int": 0,
+			"type": "text"
+		},
+		{
+			"name": "uniform",
+			"node_position": {
+				"x": -233,
+				"y": -104.5
+			},
+			"parameters": {
+				"color": {
+					"a": 1,
+					"b": 1,
+					"g": 0.415686,
+					"r": 0,
+					"type": "Color"
+				}
+			},
+			"seed_int": 0,
+			"type": "uniform"
+		}
+	],
+	"parameters": {
+
+	},
+	"seed_int": 0,
+	"shortdesc": "",
+	"type": "graph"
+}

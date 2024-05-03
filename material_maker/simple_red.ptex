@@ -4,15 +4,16 @@
 	],
 	"label": "Graph",
 	"longdesc": "",
-	"name": "1218",
+	"name": "@@571",
 	"node_position": {
 		"x": 0,
 		"y": 0
 	},
 	"nodes": [
 		{
+			"export_last_target": "Godot/Godot 4 ORM",
 			"export_paths": {
-
+				"Godot/Godot 4 ORM": "C:/Users/jeppe/Documents/Godot/v4/one_game_a_month_35/materials/simple_red"
 			},
 			"name": "Material",
 			"node_position": {
@@ -22,9 +23,9 @@
 			"parameters": {
 				"albedo_color": {
 					"a": 1,
-					"b": 0.631373,
-					"g": 0.533333,
-					"r": 0.098039,
+					"b": 0.098039,
+					"g": 0.098039,
+					"r": 0.631373,
 					"type": "Color"
 				},
 				"ao": 1,

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn5p6wefqllmy"]
+
+[ext_resource type="Script" path="res://scripts/attack_command.gd" id="1_4cs4h"]
+[ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="2_rsf6h"]
+
+[node name="attack_command" type="Node3D"]
+script = ExtResource("1_4cs4h")
+_attack_highlight_prefab = ExtResource("2_rsf6h")
+
+[node name="highlight_attack" parent="." instance=ExtResource("2_rsf6h")]
+
+[node name="highlight_attack2" parent="." instance=ExtResource("2_rsf6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="highlight_attack3" parent="." instance=ExtResource("2_rsf6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnf4hgykiyqlh"]
+
+[ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="1_j3uxm"]
+[ext_resource type="Material" path="res://materials/simple_red.tres" id="2_0mhix"]
+
+[node name="highlight_attack" type="Node3D"]
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.0494804, 0)
+mesh = ExtResource("1_j3uxm")
+surface_material_override/0 = ExtResource("2_0mhix")

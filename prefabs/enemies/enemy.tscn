@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://4gae5wuvsg0f"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_hvbqw"]
+[ext_resource type="Material" uid="uid://cea11se2jmcfh" path="res://materials/simple_black.tres" id="1_l4dyc"]
+[ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="1_obaad"]
+[ext_resource type="Material" path="res://materials/simple_yellow.tres" id="2_dsgh1"]
+[ext_resource type="Script" path="res://scripts/text.gd" id="3_elhib"]
+
+[sub_resource type="TextMesh" id="TextMesh_s8kai"]
+resource_local_to_scene = true
+material = ExtResource("1_l4dyc")
+text = "8"
+font_size = 24
+depth = 0.01
+
+[node name="enemy" type="Node3D"]
+script = ExtResource("1_hvbqw")
+
+[node name="health_text" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0356002, 0.274688)
+mesh = SubResource("TextMesh_s8kai")
+script = ExtResource("3_elhib")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.0196226, 0)
+mesh = ExtResource("1_obaad")
+surface_material_override/0 = ExtResource("2_dsgh1")
