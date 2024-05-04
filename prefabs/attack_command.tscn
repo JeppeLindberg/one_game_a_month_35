@@ -6,11 +6,3 @@
 [node name="attack_command" type="Node3D"]
 script = ExtResource("1_4cs4h")
 _attack_highlight_prefab = ExtResource("2_rsf6h")
-
-[node name="highlight_attack" parent="." instance=ExtResource("2_rsf6h")]
-
-[node name="highlight_attack2" parent="." instance=ExtResource("2_rsf6h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-
-[node name="highlight_attack3" parent="." instance=ExtResource("2_rsf6h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)

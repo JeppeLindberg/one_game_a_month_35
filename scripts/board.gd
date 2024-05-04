@@ -15,7 +15,7 @@ func get_tile(x, y):
 	return null
 
 func get_entity_via_vec(vec):
-	return get_entity(vec.x, vec.z)
+	return get_entity(round(vec.x), round(vec.z))
 
 func get_entity(x, y):
 	for child in _entities.get_children():
