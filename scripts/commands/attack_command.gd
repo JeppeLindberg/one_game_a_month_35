@@ -10,8 +10,10 @@ var _game_manager
 var card_source: Node
 var attack_positions: Array
 
-var multiplier = 5
+var damage = 5
+var multiplier = 1
 
+var _card_discarded = false;
 var _locked_attack = false;
 var _hovering_tile = null;
 
@@ -72,15 +74,17 @@ func mouse_release(_event):
 
 func trigger(phase):
 	if phase == 'resolving_player_turn':
+		if not _card_discarded:
+			card_source.move_to_discard_pile()
+
 		if multiplier == 0:
 			_game_manager.resolve_node(self, true)
-			card_source.move_to_discard()
 			return
 		else:
 			for pos in attack_positions:
 				var entity = _board.get_entity_via_vec(_hovering_tile.global_position + pos)
 				if entity is Node:
-					entity.take_damage(1)
+					entity.take_damage(damage)
 					
 			multiplier -= 1
 			_game_manager.resolve_node(self, false)

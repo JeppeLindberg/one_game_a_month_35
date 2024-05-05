@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ftu7pwhic3e0"]
+[gd_scene load_steps=35 format=3 uid="uid://ftu7pwhic3e0"]
 
 [ext_resource type="ArrayMesh" uid="uid://cx3ifjn71vfva" path="res://models/cube.obj" id="1_b3wd0"]
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="1_d6f2s"]
@@ -21,6 +21,14 @@
 [ext_resource type="Script" path="res://scripts/discard_pile.gd" id="6_fimlg"]
 [ext_resource type="PackedScene" uid="uid://dp0vrodr3vgiv" path="res://prefabs/text.tscn" id="7_ldq8t"]
 [ext_resource type="PackedScene" uid="uid://bxjrpb054paxx" path="res://prefabs/triggers/trigger_setting_up.tscn" id="13_lfvd7"]
+[ext_resource type="Script" path="res://scripts/draw_pile.gd" id="13_n0s7q"]
+[ext_resource type="PackedScene" uid="uid://brrfu1x3oy3r2" path="res://prefabs/cards/1die.tscn" id="13_xl1sd"]
+[ext_resource type="PackedScene" uid="uid://chsai2e4355v7" path="res://prefabs/cards/2die.tscn" id="14_3cqvy"]
+[ext_resource type="PackedScene" uid="uid://d3quwap7sp02y" path="res://prefabs/cards/pierce.tscn" id="14_pnkg1"]
+[ext_resource type="PackedScene" uid="uid://dgg62duxrkqxb" path="res://prefabs/cards/3die.tscn" id="15_kt5vn"]
+[ext_resource type="PackedScene" uid="uid://qp2mkgd2bafh" path="res://prefabs/cards/4die.tscn" id="15_sbmk3"]
+[ext_resource type="PackedScene" uid="uid://d4m606yaxihaq" path="res://prefabs/cards/5die.tscn" id="17_guicl"]
+[ext_resource type="PackedScene" uid="uid://p58081eyu16p" path="res://prefabs/cards/6die.tscn" id="18_gta7k"]
 
 [sub_resource type="Curve" id="Curve_c60ni"]
 _data = [Vector2(0, 0), 0.0, 3.63649, 0, 0, Vector2(0.496504, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.47215, 0.0, 0, 0]
@@ -55,6 +63,8 @@ _enemy_prefab = ExtResource("3_j385m")
 
 [node name="trigger_enemy_turn" parent="enemy_spawner" instance=ExtResource("4_s388d")]
 
+[node name="enemy_waves" type="Node3D" parent="."]
+
 [node name="bell" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, -0.695421, 3.18587, 6.42055)
 script = ExtResource("5_ck6ir")
@@ -82,26 +92,23 @@ script = ExtResource("6_fimlg")
 
 [node name="draw_pile" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, -0.708881, 1.8668, 7.18203)
+script = ExtResource("13_n0s7q")
 
-[node name="card" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+[node name="1die" parent="draw_pile" instance=ExtResource("13_xl1sd")]
 
-[node name="card2" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+[node name="2die" parent="draw_pile" instance=ExtResource("14_3cqvy")]
 
-[node name="card3" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+[node name="3die" parent="draw_pile" instance=ExtResource("15_kt5vn")]
 
-[node name="card4" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+[node name="4die" parent="draw_pile" instance=ExtResource("15_sbmk3")]
 
-[node name="card5" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+[node name="5die" parent="draw_pile" instance=ExtResource("17_guicl")]
 
-[node name="card6" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+[node name="5die2" parent="draw_pile" instance=ExtResource("18_gta7k")]
 
-[node name="card7" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+[node name="pierce" parent="draw_pile" instance=ExtResource("14_pnkg1")]
 
-[node name="card8" parent="draw_pile" instance=ExtResource("2_wf0sm")]
-
-[node name="card9" parent="draw_pile" instance=ExtResource("2_wf0sm")]
-
-[node name="card10" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+[node name="swipe" parent="draw_pile" instance=ExtResource("2_wf0sm")]
 
 [node name="game_manager" type="Node3D" parent="."]
 script = ExtResource("2_g8jo3")

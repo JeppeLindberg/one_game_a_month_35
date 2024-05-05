@@ -22,13 +22,14 @@ func _unhandled_input(event):
 			_current_command.mouse_move(event);
 	if event is InputEventMouseButton:
 		if (event.button_index == MOUSE_BUTTON_LEFT) and (event.pressed):
-			var bell = _main_scene.get_collision(event.position, 'bell')
-			if bell is Node:
-				bell.mouse_press();
+			if (_current_command == null) or (_current_command.is_queued_for_deletion()):
+				var bell = _main_scene.get_collision(event.position, 'bell')
+				if bell is Node:
+					bell.mouse_press();
 
-			var card = _main_scene.get_collision(event.position, 'card')
-			if card is Node:
-				card.mouse_press();
+				var card = _main_scene.get_collision(event.position, 'card')
+				if card is Node:
+					card.mouse_press();
 				
 			if (_current_command != null) and (not _current_command.is_queued_for_deletion()):
 				_current_command.mouse_press(event);

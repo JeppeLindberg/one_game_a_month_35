@@ -34,7 +34,8 @@ func _process(_delta):
 		for node in _main_scene.get_children_in_groups(_main_scene, [_phase], true):
 			if (node.priority == highest_priority) and (node not in _ignoring_triggers):
 				fully_resolved = false
-				_resolving_node = node.trigger(_phase)
+				_resolving_node = node.get_parent()
+				node.trigger(_phase)
 				return
 	
 		if fully_resolved:
@@ -65,9 +66,10 @@ func _let_player_play_card():
 	_resolving_node = null
 
 func resolve_player_turn():
-	_phase = 'resolving_player_turn'
-	_ignoring_triggers = []
-	_resolving_node = null
+	if _phase == 'player_play_card':
+		_phase = 'resolving_player_turn'
+		_ignoring_triggers = []
+		_resolving_node = null
 
 func _clear_command():
 	for child in _control.get_children():

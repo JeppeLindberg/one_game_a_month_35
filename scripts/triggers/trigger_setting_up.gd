@@ -8,6 +8,5 @@ func _ready():
 func trigger(phase):
 	var parent = get_parent()
 	parent.trigger(phase)
-	return parent
 
 
