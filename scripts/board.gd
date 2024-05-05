@@ -19,8 +19,16 @@ func get_entity_via_vec(vec):
 
 func get_entity(x, y):
 	for child in _entities.get_children():
-		if child.position == Vector3(x, 0, y):
+		if child.current_position == Vector3(x, 0, y):
 			return child
 	
 	return null
+
+func get_entities_in_row(y):
+	var entities = []
+	for child in _entities.get_children():
+		if child.current_position.z == y:
+			entities.append(child)
+	
+	return entities
 

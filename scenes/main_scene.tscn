@@ -1,17 +1,37 @@
-[gd_scene load_steps=15 format=3 uid="uid://ftu7pwhic3e0"]
+[gd_scene load_steps=27 format=3 uid="uid://ftu7pwhic3e0"]
 
 [ext_resource type="ArrayMesh" uid="uid://cx3ifjn71vfva" path="res://models/cube.obj" id="1_b3wd0"]
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="1_d6f2s"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_jk80a"]
+[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="2_2gexo"]
 [ext_resource type="Material" path="res://materials/simple_blue.tres" id="2_5tyck"]
 [ext_resource type="Script" path="res://scripts/tile.gd" id="2_dce16"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="2_g8jo3"]
 [ext_resource type="Material" uid="uid://cea11se2jmcfh" path="res://materials/simple_black.tres" id="2_j5vto"]
 [ext_resource type="Script" path="res://scripts/control.gd" id="2_o48t3"]
-[ext_resource type="PackedScene" uid="uid://bq7wtdh4svhqy" path="res://prefabs/cards/card.tscn" id="2_wf0sm"]
-[ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="3_gwqjg"]
+[ext_resource type="PackedScene" uid="uid://bq7wtdh4svhqy" path="res://prefabs/cards/swipe.tscn" id="2_wf0sm"]
+[ext_resource type="Script" path="res://scripts/enemy_behaviour.gd" id="2_x70cv"]
 [ext_resource type="PackedScene" uid="uid://4gae5wuvsg0f" path="res://prefabs/enemies/enemy.tscn" id="3_j385m"]
+[ext_resource type="PackedScene" uid="uid://bk6onjv7f0eig" path="res://prefabs/triggers/trigger_enemy_turn.tscn" id="4_s388d"]
+[ext_resource type="Script" path="res://scripts/hand.gd" id="5_ado8o"]
+[ext_resource type="Script" path="res://scripts/bell.gd" id="5_ck6ir"]
 [ext_resource type="Script" path="res://scripts/board.gd" id="5_m5hlm"]
+[ext_resource type="PackedScene" uid="uid://day2xh8wfjhdb" path="res://prefabs/commands/bell_command.tscn" id="6_2ab21"]
+[ext_resource type="Material" path="res://materials/simple_yellow.tres" id="6_2wnlc"]
+[ext_resource type="Script" path="res://scripts/discard_pile.gd" id="6_fimlg"]
+[ext_resource type="PackedScene" uid="uid://dp0vrodr3vgiv" path="res://prefabs/text.tscn" id="7_ldq8t"]
+[ext_resource type="PackedScene" uid="uid://bxjrpb054paxx" path="res://prefabs/triggers/trigger_setting_up.tscn" id="13_lfvd7"]
+
+[sub_resource type="Curve" id="Curve_c60ni"]
+_data = [Vector2(0, 0), 0.0, 3.63649, 0, 0, Vector2(0.496504, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.47215, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_87n3x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.178267), -1.85822, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pdbnv"]
+size = Vector3(1, 0.0551758, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qu3yu"]
 size = Vector3(1, 0.133667, 1)
@@ -20,39 +40,73 @@ size = Vector3(1, 0.133667, 1)
 
 [node name="main_scene" type="Node3D"]
 script = ExtResource("1_jk80a")
+card_up_curve = SubResource("Curve_c60ni")
+card_horizontal_curve = SubResource("Curve_87n3x")
+
+[node name="enemy_behaviour" type="Node3D" parent="."]
+script = ExtResource("2_x70cv")
+
+[node name="trigger_enemy_turn" parent="enemy_behaviour" instance=ExtResource("4_s388d")]
+priority = 1
+
+[node name="enemy_spawner" type="Node3D" parent="."]
+script = ExtResource("2_2gexo")
+_enemy_prefab = ExtResource("3_j385m")
+
+[node name="trigger_enemy_turn" parent="enemy_spawner" instance=ExtResource("4_s388d")]
+
+[node name="bell" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, -0.695421, 3.18587, 6.42055)
+script = ExtResource("5_ck6ir")
+_bell_command_prefab = ExtResource("6_2ab21")
+
+[node name="mesh" type="MeshInstance3D" parent="bell"]
+mesh = ExtResource("1_d6f2s")
+surface_material_override/0 = ExtResource("6_2wnlc")
+
+[node name="collider" type="CollisionShape3D" parent="bell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00463772, -4.76837e-07)
+shape = SubResource("BoxShape3D_pdbnv")
+
+[node name="text" parent="bell" instance=ExtResource("7_ldq8t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.76837e-07, -0.0233154)
+starting_text = "Bell"
 
 [node name="hand" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.501964, -0.864889, 0, 0.864889, 0.501964, 2, 1.8668, 7.18203)
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, 2, 1.8668, 7.18203)
+script = ExtResource("5_ado8o")
 
-[node name="card" parent="hand" instance=ExtResource("2_wf0sm")]
+[node name="discard_pile" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 4.709, 1.867, 7.182)
+script = ExtResource("6_fimlg")
 
-[node name="card2" parent="hand" instance=ExtResource("2_wf0sm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10336, 0, 0)
+[node name="draw_pile" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, -0.708881, 1.8668, 7.18203)
 
-[node name="highlight_attack2" parent="hand/card2/attack_pattern" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 0, -1)
+[node name="card" parent="draw_pile" instance=ExtResource("2_wf0sm")]
 
-[node name="highlight_attack3" parent="hand/card2/attack_pattern" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, -3.8147e-06, 0.999999)
+[node name="card2" parent="draw_pile" instance=ExtResource("2_wf0sm")]
 
-[node name="card3" parent="hand" instance=ExtResource("2_wf0sm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13709, 0, 0)
+[node name="card3" parent="draw_pile" instance=ExtResource("2_wf0sm")]
 
-[node name="highlight_attack4" parent="hand/card3/attack_pattern" index="1" instance=ExtResource("3_gwqjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+[node name="card4" parent="draw_pile" instance=ExtResource("2_wf0sm")]
 
-[node name="highlight_attack5" parent="hand/card3/attack_pattern" index="2" instance=ExtResource("3_gwqjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -3.8147e-06, 2)
+[node name="card5" parent="draw_pile" instance=ExtResource("2_wf0sm")]
 
-[node name="highlight_attack2" parent="hand/card3/attack_pattern" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+[node name="card6" parent="draw_pile" instance=ExtResource("2_wf0sm")]
 
-[node name="highlight_attack3" parent="hand/card3/attack_pattern" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 1, -3.8147e-06, 0.999999)
+[node name="card7" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+
+[node name="card8" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+
+[node name="card9" parent="draw_pile" instance=ExtResource("2_wf0sm")]
+
+[node name="card10" parent="draw_pile" instance=ExtResource("2_wf0sm")]
 
 [node name="game_manager" type="Node3D" parent="."]
 script = ExtResource("2_g8jo3")
-_enemy_prefab = ExtResource("3_j385m")
+
+[node name="trigger_setting_up" parent="game_manager" instance=ExtResource("13_lfvd7")]
 
 [node name="control" type="Node3D" parent="."]
 script = ExtResource("2_o48t3")
@@ -419,6 +473,3 @@ surface_material_override/0 = ExtResource("2_j5vto")
 
 [node name="directonal_light" type="DirectionalLight3D" parent="static_world/light"]
 transform = Transform3D(0.753024, -0.41596, 0.509836, 1.5628e-08, 0.774834, 0.632165, -0.657993, -0.476035, 0.583469, 5.68445, 1.28105, 4.20563)
-
-[editable path="hand/card2"]
-[editable path="hand/card3"]

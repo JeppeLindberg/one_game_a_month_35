@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp0vrodr3vgiv"]
+
+[ext_resource type="Script" path="res://scripts/text.gd" id="1_bk51m"]
+[ext_resource type="Material" uid="uid://cea11se2jmcfh" path="res://materials/simple_black.tres" id="2_wxlv1"]
+
+[sub_resource type="TextMesh" id="TextMesh_s8kai"]
+resource_local_to_scene = true
+material = ExtResource("2_wxlv1")
+text = "bla"
+font_size = 24
+depth = 0.01
+
+[node name="text" type="Node3D"]
+script = ExtResource("1_bk51m")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.03, 0)
+mesh = SubResource("TextMesh_s8kai")
+skeleton = NodePath("../..")

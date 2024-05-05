@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://day2xh8wfjhdb"]
+
+[ext_resource type="Script" path="res://scripts/commands/bell_command.gd" id="1_uxotr"]
+[ext_resource type="PackedScene" uid="uid://by2fhi4dg11og" path="res://prefabs/triggers/trigger_player_turn.tscn" id="2_t6yy0"]
+
+[node name="bell_command" type="Node3D"]
+script = ExtResource("1_uxotr")
+
+[node name="trigger_player_turn" parent="." instance=ExtResource("2_t6yy0")]

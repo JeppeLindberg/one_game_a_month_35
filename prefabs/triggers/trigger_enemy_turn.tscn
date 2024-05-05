@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk6onjv7f0eig"]
+
+[ext_resource type="Script" path="res://scripts/triggers/trigger_enemy_turn.gd" id="1_2yhcr"]
+
+[node name="trigger_enemy_turn" type="Node3D"]
+script = ExtResource("1_2yhcr")

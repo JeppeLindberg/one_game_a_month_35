@@ -3,12 +3,15 @@ extends Node3D
 var _camera: Camera3D
 var _game_manager
 
+@export var card_up_curve: Curve
+@export var card_horizontal_curve: Curve
+
 var _result
 
 func _ready():
 	_camera = get_node('/root/main_scene/camera');
 	_game_manager = get_node('/root/main_scene/game_manager');
-	_game_manager.go_to_next_battle()
+	_game_manager.set_up()
 
 # Get all children of the node that belongs to all of the given groups
 func get_children_in_groups(node, groups, recursive = false):
@@ -55,4 +58,8 @@ func get_collision(screen_pos, group):
 
 	return false
 
+func delay(secs = 0.1):
+	await get_tree().create_timer(secs).timeout
 
+func seconds():
+	return float(Time.get_ticks_msec()) / 1000.0

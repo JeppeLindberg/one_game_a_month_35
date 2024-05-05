@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://by2fhi4dg11og"]
+
+[ext_resource type="Script" path="res://scripts/triggers/trigger_player_turn.gd" id="1_gvy70"]
+
+[node name="trigger_player_turn" type="Node3D"]
+script = ExtResource("1_gvy70")

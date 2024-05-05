@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn5p6wefqllmy"]
+
+[ext_resource type="Script" path="res://scripts/commands/attack_command.gd" id="1_j6mqj"]
+[ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="2_rlqts"]
+[ext_resource type="PackedScene" uid="uid://by2fhi4dg11og" path="res://prefabs/triggers/trigger_player_turn.tscn" id="3_04grm"]
+
+[node name="attack_command" type="Node3D"]
+script = ExtResource("1_j6mqj")
+_attack_highlight_prefab = ExtResource("2_rlqts")
+
+[node name="trigger_player_turn" parent="." instance=ExtResource("3_04grm")]
