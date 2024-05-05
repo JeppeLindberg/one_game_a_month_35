@@ -5,6 +5,7 @@ var _board
 var _entities
 var _hand
 var _draw_pile
+var _control
 
 var _phase = 'none'
 var _ignoring_triggers = []
@@ -15,6 +16,7 @@ func _ready():
 	_board = get_node('/root/main_scene/board')
 	_hand = get_node('/root/main_scene/hand')
 	_draw_pile = get_node('/root/main_scene/draw_pile')
+	_control = get_node('/root/main_scene/control')
 	_entities = _board.get_node('entities')
 
 func _process(_delta):
@@ -43,6 +45,7 @@ func _process(_delta):
 				_let_player_play_card()
 				return
 			elif _phase == 'resolving_player_turn':
+				_clear_command()
 				_resolve_enemy_turn()
 				return
 
@@ -66,14 +69,19 @@ func resolve_player_turn():
 	_ignoring_triggers = []
 	_resolving_node = null
 
+func _clear_command():
+	for child in _control.get_children():
+		child.queue_free()
+
 func resolve_node(node, done, secs = 0.1):
 	if secs > 0.0:
 		await _main_scene.delay(secs)
 
 	_resolving_node = null
 	if done:
-		var resolved_trigger = _main_scene.get_children_in_groups(node, [_phase])[0]
-		_ignoring_triggers.append(resolved_trigger)
+		var resolved_trigger_array = _main_scene.get_children_in_groups(node, [_phase])
+		if len(resolved_trigger_array) > 0:
+			_ignoring_triggers.append(resolved_trigger_array[0])
 
 func trigger(phase):
 	if phase == 'setting_up':

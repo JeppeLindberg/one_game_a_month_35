@@ -4,6 +4,8 @@ var _board
 var _game_manager
 var _enemy_spawner
 
+var _ignored_nodes = []
+
 func _ready():
 	_board = get_node('/root/main_scene/board')
 	_game_manager = get_node('/root/main_scene/game_manager')
@@ -16,9 +18,10 @@ func trigger(phase):
 
 		for y in range(4,-1,-1):
 			for entity in _board.get_entities_in_row(y):
-				if entity.is_in_group('enemy'):
+				if (entity not in _ignored_nodes) and entity.is_in_group('enemy'):
 					found_enemy = true
 					resolved = false
+					_ignored_nodes.append(entity)
 					entity.move_forward()
 
 			if found_enemy:
@@ -26,6 +29,7 @@ func trigger(phase):
 				return
 
 		if resolved:
+			_ignored_nodes = []
 			_enemy_spawner.prepare_wave();
 			_game_manager.resolve_node(self, true)
 		

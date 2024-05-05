@@ -65,7 +65,10 @@ func mouse_press(event):
 	_update_visual()
 
 func mouse_release(_event):
-	_commit_attack()
+	if _hovering_tile != null:
+		_commit_attack()
+	else:
+		queue_free()
 
 func trigger(phase):
 	if phase == 'resolving_player_turn':
