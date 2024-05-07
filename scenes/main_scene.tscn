@@ -1,11 +1,13 @@
-[gd_scene load_steps=35 format=3 uid="uid://ftu7pwhic3e0"]
+[gd_scene load_steps=38 format=3 uid="uid://ftu7pwhic3e0"]
 
 [ext_resource type="ArrayMesh" uid="uid://cx3ifjn71vfva" path="res://models/cube.obj" id="1_b3wd0"]
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="1_d6f2s"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_jk80a"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="2_2gexo"]
 [ext_resource type="Material" path="res://materials/simple_blue.tres" id="2_5tyck"]
+[ext_resource type="Script" path="res://scripts/debug.gd" id="2_bvpfr"]
 [ext_resource type="Script" path="res://scripts/tile.gd" id="2_dce16"]
+[ext_resource type="PackedScene" uid="uid://bswj4l3jv0snc" path="res://prefabs/text_yellow.tscn" id="2_ermqf"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="2_g8jo3"]
 [ext_resource type="Material" uid="uid://cea11se2jmcfh" path="res://materials/simple_black.tres" id="2_j5vto"]
 [ext_resource type="Script" path="res://scripts/control.gd" id="2_o48t3"]
@@ -19,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://day2xh8wfjhdb" path="res://prefabs/commands/bell_command.tscn" id="6_2ab21"]
 [ext_resource type="Material" path="res://materials/simple_yellow.tres" id="6_2wnlc"]
 [ext_resource type="Script" path="res://scripts/discard_pile.gd" id="6_fimlg"]
+[ext_resource type="Script" path="res://scripts/enemy_waves.gd" id="6_tecup"]
 [ext_resource type="PackedScene" uid="uid://dp0vrodr3vgiv" path="res://prefabs/text.tscn" id="7_ldq8t"]
 [ext_resource type="PackedScene" uid="uid://bxjrpb054paxx" path="res://prefabs/triggers/trigger_setting_up.tscn" id="13_lfvd7"]
 [ext_resource type="Script" path="res://scripts/draw_pile.gd" id="13_n0s7q"]
@@ -51,6 +54,11 @@ script = ExtResource("1_jk80a")
 card_up_curve = SubResource("Curve_c60ni")
 card_horizontal_curve = SubResource("Curve_87n3x")
 
+[node name="debug" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 4.32642, 3, 4)
+script = ExtResource("2_bvpfr")
+_debug_text_prefab = ExtResource("2_ermqf")
+
 [node name="enemy_behaviour" type="Node3D" parent="."]
 script = ExtResource("2_x70cv")
 
@@ -64,6 +72,7 @@ _enemy_prefab = ExtResource("3_j385m")
 [node name="trigger_enemy_turn" parent="enemy_spawner" instance=ExtResource("4_s388d")]
 
 [node name="enemy_waves" type="Node3D" parent="."]
+script = ExtResource("6_tecup")
 
 [node name="bell" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, -0.695421, 3.18587, 6.42055)

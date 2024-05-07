@@ -14,6 +14,7 @@ size = Vector3(1, 0.0610962, 1)
 script = ExtResource("1_ilf0y")
 _name = "Pierce"
 _command_prefab = ExtResource("2_eioef")
+_multiplier = 2
 
 [node name="small_view" type="Node3D" parent="."]
 

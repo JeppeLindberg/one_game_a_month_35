@@ -14,6 +14,7 @@ size = Vector3(1, 0.0610962, 1)
 script = ExtResource("1_pbjga")
 _name = "2-Die"
 _command_prefab = ExtResource("2_igp75")
+_multiplier = 3
 
 [node name="small_view" type="Node3D" parent="."]
 
@@ -28,10 +29,10 @@ surface_material_override/0 = ExtResource("4_177ns")
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0432857, -0.475272)
 
 [node name="highlight_attack" parent="full_view/attack_pattern" instance=ExtResource("5_1l3sm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 
 [node name="highlight_attack2" parent="full_view/attack_pattern" instance=ExtResource("5_1l3sm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
 [node name="mesh" type="MeshInstance3D" parent="full_view"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.53674e-07, -0.425539)

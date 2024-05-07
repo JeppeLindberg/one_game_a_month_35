@@ -7,7 +7,7 @@
 
 [node name="enemy" type="Node3D"]
 script = ExtResource("1_hvbqw")
-health = 10
+health = 15
 
 [node name="health_text" parent="." instance=ExtResource("2_i2oow")]
 

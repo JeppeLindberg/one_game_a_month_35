@@ -14,6 +14,7 @@ size = Vector3(1, 0.0610962, 1)
 script = ExtResource("1_q8mqi")
 _name = "3-Die"
 _command_prefab = ExtResource("2_mnld4")
+_multiplier = 2
 
 [node name="small_view" type="Node3D" parent="."]
 
@@ -34,7 +35,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
 [node name="highlight_attack3" parent="full_view/attack_pattern" instance=ExtResource("5_jipv6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="mesh" type="MeshInstance3D" parent="full_view"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.53674e-07, -0.425539)

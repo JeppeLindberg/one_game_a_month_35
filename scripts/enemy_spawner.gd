@@ -9,29 +9,51 @@ var _entities
 var _enemy_waves
 
 var _spawn_order
+var _remaining_spawns
+
+var _current_round = 0
+var _current_wave = 0
 
 func _ready():
 	_main_scene = get_node('/root/main_scene')
 	_game_manager = get_node('/root/main_scene/game_manager')
 	_enemy_waves = get_node('/root/main_scene/enemy_waves')
 	_board = get_node('/root/main_scene/board')
-	_entities = _board.get_node('entities')
+	_entities = get_node('/root/main_scene/board/entities')
+
+func prepare_round():
+	_current_round += 1
+	_enemy_waves.set_round(_current_round)
 
 func prepare_wave():
-	_spawn_order = _enemy_waves.get_spawn_order()
+	_current_wave += 1
+	_spawn_order = _enemy_waves.get_spawn_order(_current_wave)
+	_remaining_spawns = _enemy_waves.get_enemies(_current_wave)
 
-func trigger(phase):
-	if phase == 'resolving_enemy_turn':
-		var spawn_pos = _spawn_order.pop_front()
-		var tile = _board.get_tile(spawn_pos.x, spawn_pos.y)
+func _spawn_enemy():
+	_remaining_spawns -= 1
+
+	for spawn_pos in _spawn_order:
+		var entity = _board.get_entity(spawn_pos.x, spawn_pos.y)
+		if entity is Node:
+			continue
+		
+		var tile = _board.get_tile(spawn_pos.x, spawn_pos.y)		
 		if tile is Node:
 			var enemy = _enemy_prefab.instantiate()
 			_entities.add_child(enemy)
 			enemy.global_position = tile.global_position
 			enemy.current_position = enemy.global_position
+			return true
+	
+	return false
+
+func trigger(phase):
+	if phase == 'resolving_enemy_turn':
+		if _remaining_spawns > 0:
+			if _spawn_enemy():
+				_game_manager.resolve_node(self, false)
+				return
 		
-		if _spawn_order.is_empty():
-			_game_manager.resolve_node(self, true)
-		else:
-			_game_manager.resolve_node(self, false)
+		_game_manager.resolve_node(self, true)
 		

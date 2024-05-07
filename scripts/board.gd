@@ -32,3 +32,5 @@ func get_entities_in_row(y):
 	
 	return entities
 
+func get_all_entities():
+	return _entities.get_children()

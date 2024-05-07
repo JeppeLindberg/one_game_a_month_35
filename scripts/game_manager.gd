@@ -1,6 +1,8 @@
 extends Node3D
 
 var _main_scene
+var _debug
+var _enemy_spawner
 var _board
 var _entities
 var _hand
@@ -11,15 +13,25 @@ var _phase = 'none'
 var _ignoring_triggers = []
 var _resolving_node = null
 
+var _remaining_plays = 8
+var _target_damage = 100
+var _dealt_damage = 0
+
 func _ready():
 	_main_scene = get_node('/root/main_scene')
 	_board = get_node('/root/main_scene/board')
 	_hand = get_node('/root/main_scene/hand')
 	_draw_pile = get_node('/root/main_scene/draw_pile')
 	_control = get_node('/root/main_scene/control')
+	_enemy_spawner = get_node('/root/main_scene/enemy_spawner')
+	_debug = get_node('/root/main_scene/debug')
 	_entities = _board.get_node('entities')
 
 func _process(_delta):
+	_debug.set_text('Plays', str(_remaining_plays))
+	_debug.set_text('Target damage', str(_target_damage))
+	_debug.set_text('Damage dealt', str(_dealt_damage))
+	
 	if _phase == 'player_play_card':
 		return
 
@@ -54,6 +66,7 @@ func set_up():
 	_phase = 'setting_up'
 	_ignoring_triggers = []
 	_resolving_node = null
+	_enemy_spawner.prepare_round()
 
 func _resolve_enemy_turn():
 	_phase = 'resolving_enemy_turn'
@@ -67,6 +80,7 @@ func _let_player_play_card():
 
 func resolve_player_turn():
 	if _phase == 'player_play_card':
+		_remaining_plays -= 1
 		_phase = 'resolving_player_turn'
 		_ignoring_triggers = []
 		_resolving_node = null
@@ -84,6 +98,9 @@ func resolve_node(node, done, secs = 0.1):
 		var resolved_trigger_array = _main_scene.get_children_in_groups(node, [_phase])
 		if len(resolved_trigger_array) > 0:
 			_ignoring_triggers.append(resolved_trigger_array[0])
+
+func damage_dealt(damage):
+	_dealt_damage += damage
 
 func trigger(phase):
 	if phase == 'setting_up':

@@ -13,6 +13,18 @@ func _ready():
 
 func trigger(phase):
 	if phase == 'resolving_enemy_turn':
+		var enemy_died = false
+
+		for entity in _board.get_all_entities():
+			if entity.is_in_group('enemy'):
+				if entity.health <= 0:
+					enemy_died = true
+					entity.queue_free()
+		
+		if enemy_died:
+			_game_manager.resolve_node(self, false)
+			return
+
 		var resolved = true
 		var found_enemy = false
 
