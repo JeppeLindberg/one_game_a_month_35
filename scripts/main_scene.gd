@@ -2,6 +2,7 @@ extends Node3D
 
 var _camera: Camera3D
 var _game_manager
+var _copy
 
 @export var card_up_curve: Curve
 @export var card_horizontal_curve: Curve
@@ -11,7 +12,10 @@ var _result
 func _ready():
 	_camera = get_node('/root/main_scene/camera');
 	_game_manager = get_node('/root/main_scene/game_manager');
+	_copy = get_node('/root/main_scene/copy');
+	
 	_game_manager.set_up()
+	_game_manager.prepare_upgrade_choice()
 
 # Get all children of the node that belongs to all of the given groups
 func get_children_in_groups(node, groups, recursive = false):
@@ -58,8 +62,26 @@ func get_collision(screen_pos, group):
 
 	return false
 
+func set_colliders_enabled(node, enabled):
+	if node is CollisionShape3D:
+		node.disabled = not enabled
+
+	for child in node.get_children():
+		set_colliders_enabled(child, enabled)		
+
 func delay(secs = 0.1):
 	await get_tree().create_timer(secs).timeout
 
 func seconds():
 	return float(Time.get_ticks_msec()) / 1000.0
+
+func instantiate(prefab, parent = self):
+	var instance = prefab.instantiate()
+	parent.add_child(instance)
+	instance.position = Vector3.ZERO
+	if instance.has_method("activate"):
+		instance.activate()
+
+	if instance.is_in_group('card'):
+		_copy.add_card(instance, prefab)
+	return instance

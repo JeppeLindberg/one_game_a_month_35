@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://brrfu1x3oy3r2"]
+[gd_scene load_steps=9 format=3 uid="uid://brrfu1x3oy3r2"]
 
-[ext_resource type="Script" path="res://scripts/cards/attack_card.gd" id="1_ms5oq"]
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_jjyub"]
 [ext_resource type="PackedScene" uid="uid://bn5p6wefqllmy" path="res://prefabs/commands/attack_command.tscn" id="2_1yhyk"]
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="3_0a6ww"]
+[ext_resource type="Script" path="res://scripts/cards/1die.gd" id="3_hfgtm"]
 [ext_resource type="Material" uid="uid://be2f1eln4dd12" path="res://materials/simple_green.tres" id="4_g1w4m"]
 [ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="5_vxx23"]
 [ext_resource type="PackedScene" uid="uid://dp0vrodr3vgiv" path="res://prefabs/text.tscn" id="6_acaj7"]
@@ -11,10 +12,12 @@
 size = Vector3(1, 0.0610962, 1)
 
 [node name="1die" type="StaticBody3D"]
-script = ExtResource("1_ms5oq")
+script = ExtResource("1_jjyub")
 _name = "1-Die"
 _command_prefab = ExtResource("2_1yhyk")
-_multiplier = 3
+
+[node name="implementation" type="Node3D" parent="."]
+script = ExtResource("3_hfgtm")
 
 [node name="small_view" type="Node3D" parent="."]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://chsai2e4355v7"]
+[gd_scene load_steps=9 format=3 uid="uid://chsai2e4355v7"]
 
-[ext_resource type="Script" path="res://scripts/cards/attack_card.gd" id="1_pbjga"]
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_vinpp"]
 [ext_resource type="PackedScene" uid="uid://bn5p6wefqllmy" path="res://prefabs/commands/attack_command.tscn" id="2_igp75"]
+[ext_resource type="Script" path="res://scripts/cards/die2.gd" id="3_4qcgw"]
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="3_qmr5a"]
 [ext_resource type="Material" uid="uid://be2f1eln4dd12" path="res://materials/simple_green.tres" id="4_177ns"]
 [ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="5_1l3sm"]
@@ -11,10 +12,13 @@
 size = Vector3(1, 0.0610962, 1)
 
 [node name="2die" type="StaticBody3D"]
-script = ExtResource("1_pbjga")
+script = ExtResource("1_vinpp")
 _name = "2-Die"
 _command_prefab = ExtResource("2_igp75")
 _multiplier = 3
+
+[node name="implementation" type="Node3D" parent="."]
+script = ExtResource("3_4qcgw")
 
 [node name="small_view" type="Node3D" parent="."]
 

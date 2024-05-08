@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://g4vonm37udj3"]
+
+[ext_resource type="Script" path="res://scripts/triggers/trigger_prepare_upgrade_choice.gd" id="1_jtqai"]
+
+[node name="trigger_prepare_upgrade_choice" type="Node3D"]
+script = ExtResource("1_jtqai")

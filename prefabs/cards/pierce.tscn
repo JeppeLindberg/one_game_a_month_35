@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3quwap7sp02y"]
+[gd_scene load_steps=9 format=3 uid="uid://d3quwap7sp02y"]
 
-[ext_resource type="Script" path="res://scripts/cards/attack_card.gd" id="1_ilf0y"]
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_5qwf3"]
 [ext_resource type="PackedScene" uid="uid://bn5p6wefqllmy" path="res://prefabs/commands/attack_command.tscn" id="2_eioef"]
+[ext_resource type="Script" path="res://scripts/cards/pierce.gd" id="3_co7dg"]
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="3_viplc"]
 [ext_resource type="Material" uid="uid://be2f1eln4dd12" path="res://materials/simple_green.tres" id="4_mmjgt"]
 [ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="5_7sqlj"]
@@ -11,10 +12,13 @@
 size = Vector3(1, 0.0610962, 1)
 
 [node name="pierce" type="StaticBody3D"]
-script = ExtResource("1_ilf0y")
+script = ExtResource("1_5qwf3")
 _name = "Pierce"
 _command_prefab = ExtResource("2_eioef")
 _multiplier = 2
+
+[node name="implementation" type="Node3D" parent="."]
+script = ExtResource("3_co7dg")
 
 [node name="small_view" type="Node3D" parent="."]
 

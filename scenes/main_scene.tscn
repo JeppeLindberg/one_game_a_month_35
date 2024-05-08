@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://ftu7pwhic3e0"]
+[gd_scene load_steps=43 format=3 uid="uid://ftu7pwhic3e0"]
 
 [ext_resource type="ArrayMesh" uid="uid://cx3ifjn71vfva" path="res://models/cube.obj" id="1_b3wd0"]
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="1_d6f2s"]
@@ -9,8 +9,12 @@
 [ext_resource type="Script" path="res://scripts/tile.gd" id="2_dce16"]
 [ext_resource type="PackedScene" uid="uid://bswj4l3jv0snc" path="res://prefabs/text_yellow.tscn" id="2_ermqf"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="2_g8jo3"]
+[ext_resource type="Script" path="res://scripts/deck.gd" id="2_hxf3d"]
 [ext_resource type="Material" uid="uid://cea11se2jmcfh" path="res://materials/simple_black.tres" id="2_j5vto"]
+[ext_resource type="Script" path="res://scripts/upgrade_choice.gd" id="2_o35mq"]
 [ext_resource type="Script" path="res://scripts/control.gd" id="2_o48t3"]
+[ext_resource type="Script" path="res://scripts/copy.gd" id="2_ok46n"]
+[ext_resource type="Script" path="res://scripts/upgrade.gd" id="2_vhrvq"]
 [ext_resource type="PackedScene" uid="uid://bq7wtdh4svhqy" path="res://prefabs/cards/swipe.tscn" id="2_wf0sm"]
 [ext_resource type="Script" path="res://scripts/enemy_behaviour.gd" id="2_x70cv"]
 [ext_resource type="PackedScene" uid="uid://4gae5wuvsg0f" path="res://prefabs/enemies/enemy.tscn" id="3_j385m"]
@@ -23,6 +27,7 @@
 [ext_resource type="Script" path="res://scripts/discard_pile.gd" id="6_fimlg"]
 [ext_resource type="Script" path="res://scripts/enemy_waves.gd" id="6_tecup"]
 [ext_resource type="PackedScene" uid="uid://dp0vrodr3vgiv" path="res://prefabs/text.tscn" id="7_ldq8t"]
+[ext_resource type="PackedScene" uid="uid://g4vonm37udj3" path="res://prefabs/triggers/trigger_prepare_upgrade_choice.tscn" id="8_gjo8e"]
 [ext_resource type="Script" path="res://scripts/draw_pile.gd" id="13_n0s7q"]
 [ext_resource type="PackedScene" uid="uid://brrfu1x3oy3r2" path="res://prefabs/cards/1die.tscn" id="13_xl1sd"]
 [ext_resource type="PackedScene" uid="uid://chsai2e4355v7" path="res://prefabs/cards/2die.tscn" id="14_3cqvy"]
@@ -54,16 +59,30 @@ script = ExtResource("1_jk80a")
 card_up_curve = SubResource("Curve_c60ni")
 card_horizontal_curve = SubResource("Curve_87n3x")
 
+[node name="copy" type="Node3D" parent="."]
+script = ExtResource("2_ok46n")
+
+[node name="deck" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, -0.664167, 3.96497, 5.97065)
+script = ExtResource("2_hxf3d")
+starting_deck_prefabs = Array[PackedScene]([ExtResource("13_xl1sd"), ExtResource("14_3cqvy"), ExtResource("15_kt5vn"), ExtResource("15_sbmk3"), ExtResource("17_guicl"), ExtResource("18_gta7k"), ExtResource("14_pnkg1"), ExtResource("2_wf0sm")])
+
 [node name="upgrade" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, 2, 3.14514, 6.44398)
+script = ExtResource("2_vhrvq")
+card_prefabs = Array[PackedScene]([ExtResource("13_xl1sd"), ExtResource("14_3cqvy"), ExtResource("15_kt5vn"), ExtResource("15_sbmk3"), ExtResource("17_guicl"), ExtResource("18_gta7k"), ExtResource("14_pnkg1"), ExtResource("2_wf0sm")])
 
-[node name="choices" type="Node3D" parent="upgrade"]
+[node name="upgrade_choice" type="Node3D" parent="upgrade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0, 0)
+script = ExtResource("2_o35mq")
 
-[node name="2die" parent="upgrade/choices" instance=ExtResource("14_3cqvy")]
+[node name="ui" type="Node3D" parent="upgrade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.61612)
 
-[node name="3die" parent="upgrade/choices" instance=ExtResource("15_kt5vn")]
+[node name="text" parent="upgrade/ui" instance=ExtResource("2_ermqf")]
+starting_text = "Choose upgrade"
 
-[node name="4die" parent="upgrade/choices" instance=ExtResource("15_sbmk3")]
+[node name="trigger_prepare_upgrade_choice" parent="upgrade" instance=ExtResource("8_gjo8e")]
 
 [node name="camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.722967, 0.690882, 0, -0.690882, 0.722967, 2, 9.97057, 13.2735)
@@ -447,22 +466,6 @@ shape = SubResource("BoxShape3D_qu3yu")
 [node name="draw_pile" type="Node3D" parent="round"]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, -0.708881, 1.8668, 7.18203)
 script = ExtResource("13_n0s7q")
-
-[node name="1die" parent="round/draw_pile" instance=ExtResource("13_xl1sd")]
-
-[node name="2die" parent="round/draw_pile" instance=ExtResource("14_3cqvy")]
-
-[node name="3die" parent="round/draw_pile" instance=ExtResource("15_kt5vn")]
-
-[node name="4die" parent="round/draw_pile" instance=ExtResource("15_sbmk3")]
-
-[node name="5die" parent="round/draw_pile" instance=ExtResource("17_guicl")]
-
-[node name="5die2" parent="round/draw_pile" instance=ExtResource("18_gta7k")]
-
-[node name="pierce" parent="round/draw_pile" instance=ExtResource("14_pnkg1")]
-
-[node name="swipe" parent="round/draw_pile" instance=ExtResource("2_wf0sm")]
 
 [node name="hand" type="Node3D" parent="round"]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, 2, 1.8668, 7.18203)

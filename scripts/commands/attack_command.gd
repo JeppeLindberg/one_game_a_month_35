@@ -34,8 +34,8 @@ func _update_visual():
 	
 	if (_hovering_tile != null) and (not _locked_attack):
 		for pos in attack_positions:
-			var attack_highlight = _attack_highlight_prefab.instantiate()
-			_visual_effects.add_child(attack_highlight)
+			var attack_highlight = _main_scene.instantiate(_attack_highlight_prefab)
+			attack_highlight.reparent(_visual_effects)
 			attack_highlight.global_position = _hovering_tile.global_position + pos
 			attack_highlight.add_to_group('attack_highlight')
 

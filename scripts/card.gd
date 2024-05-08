@@ -5,12 +5,17 @@ var _main_scene
 var _discard_pile
 var _draw_pile
 var _hand
+var _upgrade_choice
+var _deck
+var _implementation
 
 @export var _name: String
 @export var _command_prefab: PackedScene
-@export var _damage: int = 5
-@export var _multiplier: int = 1
 
+var damage: int
+var multiplier: int
+
+var _activated = false
 var _attack_pattern
 var _name_text
 var _damage_text
@@ -27,23 +32,36 @@ var _uncurved_position
 var _move_toward_position
 
 func _ready():
+	if _activated:
+		return
+	_activated = true
+	
 	add_to_group('card')
 	_control = get_node('/root/main_scene/control')
 	_main_scene = get_node('/root/main_scene')
 	_discard_pile = get_node('/root/main_scene/round/discard_pile')
 	_draw_pile = get_node('/root/main_scene/round/draw_pile')
 	_hand = get_node('/root/main_scene/round/hand')
+	_deck = get_node('/root/main_scene/deck')
+	_upgrade_choice = get_node('/root/main_scene/upgrade/upgrade_choice')
 	_attack_pattern = get_node('full_view/attack_pattern')
 	_name_text = get_node('full_view/name_text')
 	_damage_text = get_node('full_view/damage_text')
 	_full_view = get_node('full_view')
 	_small_view = get_node('small_view')
+	_implementation = get_node('implementation')
 
 	_target_position = global_position
 	_uncurved_position = global_position
 	_move_toward_position = global_position
+
+	damage = _implementation.damage
+	multiplier = _implementation.multiplier
 	
 	_update_visual()
+
+func activate():
+	_ready()
 
 func _process(delta):
 	if _move_toward_position != _target_position:
@@ -65,7 +83,7 @@ func _process(delta):
 
 func _update_visual():
 	_name_text.set_text(_name)	
-	_damage_text.set_text(str(_damage) + ' x ' + str(_multiplier))
+	_damage_text.set_text(str(damage) + ' x ' + str(multiplier))
 
 	var remaning_distance = global_position.distance_to(_target_position)
 	if (remaning_distance < 1) and (_allow_full_view):
@@ -79,17 +97,20 @@ func _update_visual():
 		_small_view.visible = _allow_small_view
 
 func mouse_press():
-	var command = _command_prefab.instantiate()
-	command.card_source = self
-	command.damage = _damage
-	command.multiplier = _multiplier
+	if get_parent().is_in_group('upgrade_choice'):
+		move_to_deck()
+	elif get_parent().is_in_group('hand'):
+		var command = _main_scene.instantiate(_command_prefab)
+		command.card_source = self
+		command.damage = damage
+		command.multiplier = multiplier
 
-	command.attack_positions = []
-	
-	for attack_marker in _attack_pattern.get_children():
-		command.attack_positions.append(attack_marker.position)
+		command.attack_positions = []
+		
+		for attack_marker in _attack_pattern.get_children():
+			command.attack_positions.append(attack_marker.position)
 
-	_control.set_command(command)
+		_control.set_command(command)
 
 func move_to_hand():
 	_hand.add(self)
@@ -111,6 +132,20 @@ func move_to_draw_pile():
 	_draw_pile.add(self)
 	_allow_full_view = false
 	_allow_small_view = true
+	
+	_update_visual()
+
+func move_to_upgrade_choice():
+	_allow_full_view = true
+	_allow_small_view = true
+	_upgrade_choice.add(self)
+	
+	_update_visual()
+
+func move_to_deck():
+	_allow_full_view = false
+	_allow_small_view = true
+	_deck.add(self)
 	
 	_update_visual()
 

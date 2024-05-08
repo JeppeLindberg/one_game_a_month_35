@@ -40,8 +40,8 @@ func _spawn_enemy():
 		
 		var tile = _board.get_tile(spawn_pos.x, spawn_pos.y)		
 		if tile is Node:
-			var enemy = _enemy_prefab.instantiate()
-			_entities.add_child(enemy)
+			var enemy = _main_scene.instantiate(_enemy_prefab)
+			enemy.reparent(_entities)
 			enemy.global_position = tile.global_position
 			enemy.current_position = enemy.global_position
 			return true
