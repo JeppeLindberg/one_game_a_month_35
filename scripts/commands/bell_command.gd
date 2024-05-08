@@ -12,9 +12,9 @@ var _move_cards_from_discard_to_draw_pile = false
 func _ready():
 	add_to_group('command')
 	_main_scene = get_node('/root/main_scene')
-	_hand = get_node('/root/main_scene/hand')
-	_draw_pile = get_node('/root/main_scene/draw_pile')
-	_discard_pile = get_node('/root/main_scene/discard_pile')
+	_hand = get_node('/root/main_scene/round/hand')
+	_draw_pile = get_node('/root/main_scene/round/draw_pile')
+	_discard_pile = get_node('/root/main_scene/round/discard_pile')
 	_game_manager = get_node('/root/main_scene/game_manager')
 
 func _commit_bell():

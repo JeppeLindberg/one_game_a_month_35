@@ -7,9 +7,9 @@ var _enemy_spawner
 var _ignored_nodes = []
 
 func _ready():
-	_board = get_node('/root/main_scene/board')
+	_board = get_node('/root/main_scene/round/board')
 	_game_manager = get_node('/root/main_scene/game_manager')
-	_enemy_spawner = get_node('/root/main_scene/enemy_spawner')
+	_enemy_spawner = get_node('/root/main_scene/round/enemy_spawner')
 
 func trigger(phase):
 	if phase == 'resolving_enemy_turn':

@@ -4,7 +4,6 @@ var _main_scene
 var _debug
 var _enemy_spawner
 var _board
-var _entities
 var _hand
 var _draw_pile
 var _control
@@ -19,13 +18,12 @@ var _dealt_damage = 0
 
 func _ready():
 	_main_scene = get_node('/root/main_scene')
-	_board = get_node('/root/main_scene/board')
-	_hand = get_node('/root/main_scene/hand')
-	_draw_pile = get_node('/root/main_scene/draw_pile')
+	_board = get_node('/root/main_scene/round/board')
+	_hand = get_node('/root/main_scene/round/hand')
+	_draw_pile = get_node('/root/main_scene/round/draw_pile')
 	_control = get_node('/root/main_scene/control')
-	_enemy_spawner = get_node('/root/main_scene/enemy_spawner')
+	_enemy_spawner = get_node('/root/main_scene/round/enemy_spawner')
 	_debug = get_node('/root/main_scene/debug')
-	_entities = _board.get_node('entities')
 
 func _process(_delta):
 	_debug.set_text('Plays', str(_remaining_plays))
@@ -51,7 +49,7 @@ func _process(_delta):
 				return
 	
 		if fully_resolved:
-			if _phase == 'setting_up':
+			if _phase == 'prepare_round':
 				_resolve_enemy_turn()
 				return
 			if _phase == 'resolving_enemy_turn':
@@ -63,7 +61,7 @@ func _process(_delta):
 				return
 
 func set_up():
-	_phase = 'setting_up'
+	_phase = 'prepare_round'
 	_ignoring_triggers = []
 	_resolving_node = null
 	_enemy_spawner.prepare_round()
@@ -103,7 +101,7 @@ func damage_dealt(damage):
 	_dealt_damage += damage
 
 func trigger(phase):
-	if phase == 'setting_up':
+	if phase == 'prepare_round':
 		if len(_hand.get_cards_in_hand()) < 5:
 			var draw_card = _main_scene.get_children_in_groups(_draw_pile, ['card']).pick_random()
 			draw_card.move_to_hand()

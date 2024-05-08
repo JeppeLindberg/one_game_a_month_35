@@ -17,9 +17,9 @@ var _current_wave = 0
 func _ready():
 	_main_scene = get_node('/root/main_scene')
 	_game_manager = get_node('/root/main_scene/game_manager')
-	_enemy_waves = get_node('/root/main_scene/enemy_waves')
-	_board = get_node('/root/main_scene/board')
-	_entities = get_node('/root/main_scene/board/entities')
+	_enemy_waves = get_node('/root/main_scene/round/enemy_waves')
+	_board = get_node('/root/main_scene/round/board')
+	_entities = get_node('/root/main_scene/round/board/entities')
 
 func prepare_round():
 	_current_round += 1

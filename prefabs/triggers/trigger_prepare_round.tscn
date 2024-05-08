@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://beb4yml84bxtj"]
+
+[ext_resource type="Script" path="res://scripts/triggers/trigger_prepare_round.gd" id="1_dr1xl"]
+
+[node name="trigger_prepare_round" type="Node3D"]
+script = ExtResource("1_dr1xl")

@@ -21,8 +21,8 @@ var _hovering_tile = null;
 func _ready():
 	add_to_group('command')
 	_main_scene = get_node('/root/main_scene')
-	_board = get_node('/root/main_scene/board')
-	_visual_effects = get_node('/root/main_scene/board/visual_effects')
+	_board = get_node('/root/main_scene/round/board')
+	_visual_effects = get_node('/root/main_scene/round/board/visual_effects')
 	_game_manager = get_node('/root/main_scene/game_manager')
 
 func _process(_delta):

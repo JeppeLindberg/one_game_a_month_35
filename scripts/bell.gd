@@ -9,7 +9,7 @@ var _hand
 func _ready():
 	add_to_group('bell')
 	_control = get_node('/root/main_scene/control')
-	_hand = get_node('/root/main_scene/hand')
+	_hand = get_node('/root/main_scene/round/hand')
 
 func mouse_press():
 	if len(_hand.get_cards_in_hand()) < 5:

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxjrpb054paxx"]
-
-[ext_resource type="Script" path="res://scripts/triggers/trigger_setting_up.gd" id="1_5i75x"]
-
-[node name="trigger_setting_up" type="Node3D"]
-script = ExtResource("1_5i75x")
