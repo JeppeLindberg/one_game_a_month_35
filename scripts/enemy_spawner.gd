@@ -1,7 +1,5 @@
 extends Node3D
 
-@export var _enemy_prefab: PackedScene
-
 var _main_scene
 var _game_manager
 var _board
@@ -21,18 +19,16 @@ func _ready():
 	_board = get_node('/root/main_scene/round/board')
 	_entities = get_node('/root/main_scene/round/board/entities')
 
-func prepare_round():
-	_current_round += 1
+func prepare_round(current_round):
+	_current_round = current_round
 	_enemy_waves.set_round(_current_round)
 
-func prepare_wave():
-	_current_wave += 1
+func prepare_wave(current_wave):
+	_current_wave = current_wave
 	_spawn_order = _enemy_waves.get_spawn_order(_current_wave)
-	_remaining_spawns = _enemy_waves.get_enemies(_current_wave)
+	_remaining_spawns = _enemy_waves.get_enemy_spawns_in_wave(_current_wave)
 
 func _spawn_enemy():
-	_remaining_spawns -= 1
-
 	for spawn_pos in _spawn_order:
 		var entity = _board.get_entity(spawn_pos.x, spawn_pos.y)
 		if entity is Node:
@@ -40,7 +36,7 @@ func _spawn_enemy():
 		
 		var tile = _board.get_tile(spawn_pos.x, spawn_pos.y)		
 		if tile is Node:
-			var enemy = _main_scene.instantiate(_enemy_prefab)
+			var enemy = _main_scene.instantiate(_remaining_spawns.pop_front())
 			enemy.reparent(_entities)
 			enemy.global_position = tile.global_position
 			enemy.current_position = enemy.global_position
@@ -50,7 +46,7 @@ func _spawn_enemy():
 
 func trigger(phase):
 	if phase == 'resolving_enemy_turn':
-		if _remaining_spawns > 0:
+		if len(_remaining_spawns) > 0:
 			if _spawn_enemy():
 				_game_manager.resolve_node(self, false)
 				return

@@ -1,9 +1,10 @@
-[gd_scene load_steps=43 format=3 uid="uid://ftu7pwhic3e0"]
+[gd_scene load_steps=49 format=3 uid="uid://ftu7pwhic3e0"]
 
 [ext_resource type="ArrayMesh" uid="uid://cx3ifjn71vfva" path="res://models/cube.obj" id="1_b3wd0"]
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="1_d6f2s"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_jk80a"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="2_2gexo"]
+[ext_resource type="Script" path="res://scripts/difficulty.gd" id="2_4gs6q"]
 [ext_resource type="Material" path="res://materials/simple_blue.tres" id="2_5tyck"]
 [ext_resource type="Script" path="res://scripts/debug.gd" id="2_bvpfr"]
 [ext_resource type="Script" path="res://scripts/tile.gd" id="2_dce16"]
@@ -28,14 +29,18 @@
 [ext_resource type="Script" path="res://scripts/enemy_waves.gd" id="6_tecup"]
 [ext_resource type="PackedScene" uid="uid://dp0vrodr3vgiv" path="res://prefabs/text.tscn" id="7_ldq8t"]
 [ext_resource type="PackedScene" uid="uid://g4vonm37udj3" path="res://prefabs/triggers/trigger_prepare_upgrade_choice.tscn" id="8_gjo8e"]
+[ext_resource type="Script" path="res://scripts/ui/begin_button.gd" id="13_62rkk"]
 [ext_resource type="Script" path="res://scripts/draw_pile.gd" id="13_n0s7q"]
+[ext_resource type="Script" path="res://scripts/between_rounds.gd" id="13_w3170"]
 [ext_resource type="PackedScene" uid="uid://brrfu1x3oy3r2" path="res://prefabs/cards/1die.tscn" id="13_xl1sd"]
 [ext_resource type="PackedScene" uid="uid://chsai2e4355v7" path="res://prefabs/cards/2die.tscn" id="14_3cqvy"]
+[ext_resource type="Material" uid="uid://be2f1eln4dd12" path="res://materials/simple_green.tres" id="14_bhp5s"]
 [ext_resource type="PackedScene" uid="uid://d3quwap7sp02y" path="res://prefabs/cards/pierce.tscn" id="14_pnkg1"]
 [ext_resource type="PackedScene" uid="uid://dgg62duxrkqxb" path="res://prefabs/cards/3die.tscn" id="15_kt5vn"]
 [ext_resource type="PackedScene" uid="uid://qp2mkgd2bafh" path="res://prefabs/cards/4die.tscn" id="15_sbmk3"]
 [ext_resource type="PackedScene" uid="uid://d4m606yaxihaq" path="res://prefabs/cards/5die.tscn" id="17_guicl"]
 [ext_resource type="PackedScene" uid="uid://p58081eyu16p" path="res://prefabs/cards/6die.tscn" id="18_gta7k"]
+[ext_resource type="Script" path="res://scripts/round.gd" id="22_etqfy"]
 [ext_resource type="PackedScene" uid="uid://beb4yml84bxtj" path="res://prefabs/triggers/trigger_prepare_round.tscn" id="30_2i802"]
 
 [sub_resource type="Curve" id="Curve_c60ni"]
@@ -45,6 +50,9 @@ point_count = 3
 [sub_resource type="Curve" id="Curve_87n3x"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.178267), -1.85822, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mab0s"]
+size = Vector3(1, 0.0610962, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pdbnv"]
 size = Vector3(1, 0.0551758, 1)
@@ -59,6 +67,9 @@ script = ExtResource("1_jk80a")
 card_up_curve = SubResource("Curve_c60ni")
 card_horizontal_curve = SubResource("Curve_87n3x")
 
+[node name="difficulty" type="Node3D" parent="."]
+script = ExtResource("2_4gs6q")
+
 [node name="copy" type="Node3D" parent="."]
 script = ExtResource("2_ok46n")
 
@@ -66,6 +77,42 @@ script = ExtResource("2_ok46n")
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, -0.664167, 3.96497, 5.97065)
 script = ExtResource("2_hxf3d")
 starting_deck_prefabs = Array[PackedScene]([ExtResource("13_xl1sd"), ExtResource("14_3cqvy"), ExtResource("15_kt5vn"), ExtResource("15_sbmk3"), ExtResource("17_guicl"), ExtResource("18_gta7k"), ExtResource("14_pnkg1"), ExtResource("2_wf0sm")])
+
+[node name="between_rounds" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, 2, 3.14514, 6.44398)
+script = ExtResource("13_w3170")
+
+[node name="ui" type="Node3D" parent="between_rounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.43051e-06, -1.60943)
+
+[node name="title" parent="between_rounds/ui" instance=ExtResource("2_ermqf")]
+starting_text = "Round 1"
+
+[node name="damage_needed" parent="between_rounds/ui" instance=ExtResource("2_ermqf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.386352)
+starting_text = "Damage needed: 100"
+
+[node name="available_plays" parent="between_rounds/ui" instance=ExtResource("2_ermqf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.738184)
+starting_text = "Available plays: 8"
+
+[node name="begin_button" type="StaticBody3D" parent="between_rounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.86102e-06, 0.4387)
+script = ExtResource("13_62rkk")
+
+[node name="mesh" type="MeshInstance3D" parent="between_rounds/begin_button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.53674e-07, -0.425539)
+mesh = ExtResource("1_d6f2s")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("14_bhp5s")
+
+[node name="collider" type="CollisionShape3D" parent="between_rounds/begin_button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00234985, -0.426)
+shape = SubResource("BoxShape3D_mab0s")
+
+[node name="begin" parent="between_rounds/begin_button" instance=ExtResource("7_ldq8t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.401669)
+starting_text = "Begin"
 
 [node name="upgrade" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, 2, 3.14514, 6.44398)
@@ -97,6 +144,7 @@ script = ExtResource("2_bvpfr")
 _debug_text_prefab = ExtResource("2_ermqf")
 
 [node name="round" type="Node3D" parent="."]
+script = ExtResource("22_etqfy")
 
 [node name="enemy_behaviour" type="Node3D" parent="round"]
 script = ExtResource("2_x70cv")
@@ -106,12 +154,12 @@ priority = 1
 
 [node name="enemy_spawner" type="Node3D" parent="round"]
 script = ExtResource("2_2gexo")
-_enemy_prefab = ExtResource("3_j385m")
 
 [node name="trigger_enemy_turn" parent="round/enemy_spawner" instance=ExtResource("4_s388d")]
 
 [node name="enemy_waves" type="Node3D" parent="round"]
 script = ExtResource("6_tecup")
+_enemy_prefabs = Array[PackedScene]([ExtResource("3_j385m")])
 
 [node name="bell" type="StaticBody3D" parent="round"]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, -0.695421, 3.18587, 6.42055)

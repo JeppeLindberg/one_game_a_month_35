@@ -30,7 +30,12 @@ func _unhandled_input(event):
 					card.mouse_press();
 		
 		if upgrade_chosen:
-			_game_manager.prepare_round()
+			_game_manager.between_rounds()
+	
+	elif _game_manager.phase == 'between_rounds':
+		if event is InputEventMouseButton:
+			if (event.button_index == MOUSE_BUTTON_LEFT) and (not event.pressed):
+				_game_manager.prepare_round()
 
 	elif _game_manager.phase == 'player_play_card':
 		if event is InputEventMouseMotion:

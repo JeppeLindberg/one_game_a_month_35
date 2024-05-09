@@ -5,11 +5,15 @@ var _game_manager
 var _enemy_spawner
 
 var _ignored_nodes = []
+var _wave = 0
 
 func _ready():
 	_board = get_node('/root/main_scene/round/board')
 	_game_manager = get_node('/root/main_scene/game_manager')
 	_enemy_spawner = get_node('/root/main_scene/round/enemy_spawner')
+
+func clear():
+	_wave = 0
 
 func trigger(phase):
 	if phase == 'resolving_enemy_turn':
@@ -42,7 +46,8 @@ func trigger(phase):
 
 		if resolved:
 			_ignored_nodes = []
-			_enemy_spawner.prepare_wave();
+			_wave += 1
+			_enemy_spawner.prepare_wave(_wave);
 			_game_manager.resolve_node(self, true)
 		
 

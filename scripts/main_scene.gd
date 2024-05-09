@@ -85,3 +85,17 @@ func instantiate(prefab, parent = self):
 	if instance.is_in_group('card'):
 		_copy.add_card(instance, prefab)
 	return instance
+
+func get_power(enemy_prefab):
+	var enemy = instantiate(enemy_prefab)
+	var implementation = enemy.get_node('implementation')
+	var power = implementation.health * implementation.threat
+	enemy.queue_free()
+	return power
+
+func clear(node):
+	if node.has_method('clear'):
+		node.clear()
+	
+	for child in node.get_children():
+		clear(child)

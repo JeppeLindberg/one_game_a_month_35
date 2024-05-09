@@ -1,13 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://4gae5wuvsg0f"]
+[gd_scene load_steps=6 format=3 uid="uid://4gae5wuvsg0f"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_hvbqw"]
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="1_obaad"]
 [ext_resource type="Material" path="res://materials/simple_yellow.tres" id="2_dsgh1"]
+[ext_resource type="Script" path="res://scripts/enemies/basic_enemy.gd" id="2_hroge"]
 [ext_resource type="PackedScene" uid="uid://dp0vrodr3vgiv" path="res://prefabs/text.tscn" id="2_i2oow"]
 
 [node name="enemy" type="Node3D"]
 script = ExtResource("1_hvbqw")
-health = 15
+
+[node name="implementation" type="Node3D" parent="."]
+script = ExtResource("2_hroge")
 
 [node name="health_text" parent="." instance=ExtResource("2_i2oow")]
 
