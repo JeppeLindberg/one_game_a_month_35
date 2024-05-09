@@ -14,7 +14,17 @@ var _difficulty = {
 	2: {
 		'power': 250,
 		'plays': 9,
+		'damage_needed': 120
+	},
+	3: {
+		'power': 300,
+		'plays': 10,
 		'damage_needed': 150
+	},
+	4: {
+		'power': 350,
+		'plays': 10,
+		'damage_needed': 190
 	}
 }
 

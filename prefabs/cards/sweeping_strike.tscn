@@ -11,9 +11,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_67anj"]
 size = Vector3(1, 0.0610962, 1)
 
-[node name="swipe" type="StaticBody3D"]
+[node name="sweeping_strike" type="StaticBody3D"]
 script = ExtResource("1_14m7g")
-_name = "Swipe"
+_name = "Sweeping Strike"
 _command_prefab = ExtResource("2_vopgf")
 _multiplier = 2
 

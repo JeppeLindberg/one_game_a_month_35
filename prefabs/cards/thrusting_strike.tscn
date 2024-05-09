@@ -11,9 +11,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_67anj"]
 size = Vector3(1, 0.0610962, 1)
 
-[node name="pierce" type="StaticBody3D"]
+[node name="thrusting_strike" type="StaticBody3D"]
 script = ExtResource("1_5qwf3")
-_name = "Pierce"
+_name = "Thrusting Strike"
 _command_prefab = ExtResource("2_eioef")
 _multiplier = 2
 
