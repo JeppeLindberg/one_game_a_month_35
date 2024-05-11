@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cakxsdojfwy0q"
+path="res://.godot/imported/card_backplate.obj-dac2e88277b1a3c99516787a776dca05.mesh"
+
+[deps]
+
+files=["res://.godot/imported/card_backplate.obj-dac2e88277b1a3c99516787a776dca05.mesh"]
+
+source_file="res://models/card_backplate.obj"
+dest_files=["res://.godot/imported/card_backplate.obj-dac2e88277b1a3c99516787a776dca05.mesh", "res://.godot/imported/card_backplate.obj-dac2e88277b1a3c99516787a776dca05.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

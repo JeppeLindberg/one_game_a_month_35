@@ -86,12 +86,19 @@ func instantiate(prefab, parent = self):
 		_copy.add_card(instance, prefab)
 	return instance
 
-func get_power(enemy_prefab):
+func get_enemy_info(enemy_prefab):
 	var enemy = instantiate(enemy_prefab)
 	var implementation = enemy.get_node('implementation')
 	var power = implementation.health * implementation.threat
 	enemy.queue_free()
-	return power
+	return {'power' : power}
+
+func get_card_info(card_prefab):
+	var card = instantiate(card_prefab)
+	var implementation = card.get_node('implementation')
+	var rarity = implementation.rarity
+	card.queue_free()
+	return {'rarity' : rarity}
 
 func clear(node):
 	if node.has_method('clear'):

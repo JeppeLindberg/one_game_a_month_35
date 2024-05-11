@@ -63,7 +63,7 @@ func get_enemy_spawns_in_wave(wave):
 
 			if i == 1:
 				_waves[i] = [_enemy_prefabs.pick_random(), _enemy_prefabs.pick_random(), _enemy_prefabs.pick_random()]
-				remaining_power -= _main_scene.get_power(_waves[i][0]) + _main_scene.get_power(_waves[i][1]) + _main_scene.get_power(_waves[i][2])
+				remaining_power -= _main_scene.get_enemy_info(_waves[i][0])['power'] + _main_scene.get_enemy_info(_waves[i][1])['power'] + _main_scene.get_enemy_info(_waves[i][2])['power']
 		
 		while remaining_power > 0:
 			var lowest_count = 100
@@ -77,7 +77,7 @@ func get_enemy_spawns_in_wave(wave):
 					lowest_range.append(i)
 			
 			var new_enemy = _enemy_prefabs.pick_random()
-			var new_power = _main_scene.get_power(new_enemy)
+			var new_power = _main_scene.get_enemy_info(new_enemy)['power']
 			if remaining_power - new_power >= 0:
 				_waves[lowest_range.pick_random()].append(new_enemy)
 			

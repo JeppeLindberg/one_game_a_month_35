@@ -5,8 +5,8 @@
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="3_0a6ww"]
 [ext_resource type="Script" path="res://scripts/cards/1die.gd" id="3_hfgtm"]
 [ext_resource type="Material" uid="uid://be2f1eln4dd12" path="res://materials/simple_green.tres" id="4_g1w4m"]
+[ext_resource type="PackedScene" uid="uid://b48ewt1m2c7qp" path="res://prefabs/parts/card_full_view.tscn" id="5_gs3nh"]
 [ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="5_vxx23"]
-[ext_resource type="PackedScene" uid="uid://dp0vrodr3vgiv" path="res://prefabs/text.tscn" id="6_acaj7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_67anj"]
 size = Vector3(1, 0.0610962, 1)
@@ -26,24 +26,12 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.423152)
 mesh = ExtResource("3_0a6ww")
 surface_material_override/0 = ExtResource("4_g1w4m")
 
-[node name="full_view" type="Node3D" parent="."]
+[node name="full_view" parent="." instance=ExtResource("5_gs3nh")]
 
 [node name="attack_pattern" type="Node3D" parent="full_view"]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0432857, -0.475272)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.0432857, -0.541456)
 
 [node name="highlight_attack3" parent="full_view/attack_pattern" instance=ExtResource("5_vxx23")]
-
-[node name="mesh" type="MeshInstance3D" parent="full_view"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.53674e-07, -0.425539)
-mesh = ExtResource("3_0a6ww")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("4_g1w4m")
-
-[node name="name_text" parent="full_view" instance=ExtResource("6_acaj7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.742167)
-
-[node name="damage_text" parent="full_view" instance=ExtResource("6_acaj7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.115396)
 
 [node name="collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00234985, -0.426)

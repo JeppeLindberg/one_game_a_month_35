@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b48ewt1m2c7qp"]
+
+[ext_resource type="ArrayMesh" uid="uid://cakxsdojfwy0q" path="res://models/card_backplate.obj" id="1_5x5jt"]
+[ext_resource type="Material" uid="uid://be2f1eln4dd12" path="res://materials/simple_green.tres" id="2_l34vf"]
+[ext_resource type="ArrayMesh" uid="uid://d0k5mery02uy8" path="res://models/card_frontplate.obj" id="3_b1tpq"]
+[ext_resource type="PackedScene" uid="uid://dp0vrodr3vgiv" path="res://prefabs/text.tscn" id="3_yghu0"]
+
+[node name="full_view" type="Node3D"]
+
+[node name="backplate" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.53674e-07, -0.425539)
+mesh = ExtResource("1_5x5jt")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_l34vf")
+
+[node name="frontplate" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.53674e-07, -0.425539)
+mesh = ExtResource("3_b1tpq")
+skeleton = NodePath("../..")
+
+[node name="name_text" parent="." instance=ExtResource("3_yghu0")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, -0.894221)
+
+[node name="damage_text" parent="." instance=ExtResource("3_yghu0")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, -0.186953)

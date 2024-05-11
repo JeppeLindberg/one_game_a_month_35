@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ftu7pwhic3e0"]
+[gd_scene load_steps=56 format=3 uid="uid://ftu7pwhic3e0"]
 
 [ext_resource type="ArrayMesh" uid="uid://cx3ifjn71vfva" path="res://models/cube.obj" id="1_b3wd0"]
 [ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="1_d6f2s"]
@@ -40,7 +40,14 @@
 [ext_resource type="PackedScene" uid="uid://qp2mkgd2bafh" path="res://prefabs/cards/4die.tscn" id="15_sbmk3"]
 [ext_resource type="PackedScene" uid="uid://d4m606yaxihaq" path="res://prefabs/cards/5die.tscn" id="17_guicl"]
 [ext_resource type="PackedScene" uid="uid://p58081eyu16p" path="res://prefabs/cards/6die.tscn" id="18_gta7k"]
+[ext_resource type="PackedScene" uid="uid://cvj0xjbhq0ggq" path="res://prefabs/cards/alpha_strike.tscn" id="20_7i78g"]
+[ext_resource type="PackedScene" uid="uid://imke6l5tro8g" path="res://prefabs/cards/beta_strike.tscn" id="21_5luoj"]
 [ext_resource type="Script" path="res://scripts/round.gd" id="22_etqfy"]
+[ext_resource type="PackedScene" uid="uid://cdqwvq4a5v8v7" path="res://prefabs/cards/die.tscn" id="22_qw3wp"]
+[ext_resource type="PackedScene" uid="uid://bokv21sga5g8v" path="res://prefabs/cards/die_die.tscn" id="23_sfldu"]
+[ext_resource type="PackedScene" uid="uid://dkce56wpjwiyc" path="res://prefabs/cards/die_die_die.tscn" id="24_xwied"]
+[ext_resource type="PackedScene" uid="uid://2elikp6inxlc" path="res://prefabs/cards/omega_strike.tscn" id="25_emebs"]
+[ext_resource type="PackedScene" uid="uid://d1eer0o15yryx" path="res://prefabs/cards/zeta_strike.tscn" id="26_732kn"]
 [ext_resource type="PackedScene" uid="uid://beb4yml84bxtj" path="res://prefabs/triggers/trigger_prepare_round.tscn" id="30_2i802"]
 
 [sub_resource type="Curve" id="Curve_c60ni"]
@@ -117,7 +124,7 @@ starting_text = "Begin"
 [node name="upgrade" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, 2, 3.14514, 6.44398)
 script = ExtResource("2_vhrvq")
-card_prefabs = Array[PackedScene]([ExtResource("13_xl1sd"), ExtResource("14_3cqvy"), ExtResource("15_kt5vn"), ExtResource("15_sbmk3"), ExtResource("17_guicl"), ExtResource("18_gta7k"), ExtResource("14_pnkg1"), ExtResource("2_wf0sm")])
+card_prefabs = Array[PackedScene]([ExtResource("13_xl1sd"), ExtResource("14_3cqvy"), ExtResource("15_kt5vn"), ExtResource("15_sbmk3"), ExtResource("17_guicl"), ExtResource("18_gta7k"), ExtResource("20_7i78g"), ExtResource("21_5luoj"), ExtResource("22_qw3wp"), ExtResource("23_sfldu"), ExtResource("24_xwied"), ExtResource("25_emebs"), ExtResource("2_wf0sm"), ExtResource("14_pnkg1"), ExtResource("26_732kn")])
 
 [node name="upgrade_choice" type="Node3D" parent="upgrade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0, 0)

@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://bokv21sga5g8v"]
+
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_grxqu"]
+[ext_resource type="PackedScene" uid="uid://bn5p6wefqllmy" path="res://prefabs/commands/attack_command.tscn" id="2_btfhw"]
+[ext_resource type="Script" path="res://scripts/cards/die_die.gd" id="3_dhgon"]
+[ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="4_f2q3j"]
+[ext_resource type="Material" uid="uid://be2f1eln4dd12" path="res://materials/simple_green.tres" id="5_k0b83"]
+[ext_resource type="PackedScene" uid="uid://b48ewt1m2c7qp" path="res://prefabs/parts/card_full_view.tscn" id="6_3cdiv"]
+[ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="7_mfyaa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_67anj"]
+size = Vector3(1, 0.0610962, 1)
+
+[node name="die_die" type="StaticBody3D"]
+script = ExtResource("1_grxqu")
+_name = "Die Die"
+_command_prefab = ExtResource("2_btfhw")
+
+[node name="implementation" type="Node3D" parent="."]
+script = ExtResource("3_dhgon")
+
+[node name="small_view" type="Node3D" parent="."]
+
+[node name="mesh" type="MeshInstance3D" parent="small_view"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.423152)
+mesh = ExtResource("4_f2q3j")
+surface_material_override/0 = ExtResource("5_k0b83")
+
+[node name="full_view" parent="." instance=ExtResource("6_3cdiv")]
+
+[node name="attack_pattern" type="Node3D" parent="full_view"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.0432857, -0.541456)
+
+[node name="highlight_attack3" parent="full_view/attack_pattern" instance=ExtResource("7_mfyaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="highlight_attack4" parent="full_view/attack_pattern" instance=ExtResource("7_mfyaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="highlight_attack5" parent="full_view/attack_pattern" instance=ExtResource("7_mfyaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4.76837e-07)
+
+[node name="highlight_attack6" parent="full_view/attack_pattern" instance=ExtResource("7_mfyaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.76837e-07)
+
+[node name="collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00234985, -0.426)
+shape = SubResource("BoxShape3D_67anj")

@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1eer0o15yryx"]
+
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_i2iqq"]
+[ext_resource type="PackedScene" uid="uid://bn5p6wefqllmy" path="res://prefabs/commands/attack_command.tscn" id="2_s2y28"]
+[ext_resource type="Script" path="res://scripts/cards/zeta_strike.gd" id="3_r8aio"]
+[ext_resource type="ArrayMesh" uid="uid://dlhsjbeirjpup" path="res://models/plane.obj" id="4_e70y6"]
+[ext_resource type="Material" uid="uid://be2f1eln4dd12" path="res://materials/simple_green.tres" id="5_bbgj6"]
+[ext_resource type="PackedScene" uid="uid://b48ewt1m2c7qp" path="res://prefabs/parts/card_full_view.tscn" id="6_jen5s"]
+[ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="7_0kcv8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_67anj"]
+size = Vector3(1, 0.0610962, 1)
+
+[node name="zeta_strike" type="StaticBody3D"]
+script = ExtResource("1_i2iqq")
+_name = "Zeta Strike"
+_command_prefab = ExtResource("2_s2y28")
+_multiplier = 2
+
+[node name="implementation" type="Node3D" parent="."]
+script = ExtResource("3_r8aio")
+
+[node name="small_view" type="Node3D" parent="."]
+
+[node name="mesh" type="MeshInstance3D" parent="small_view"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.423152)
+mesh = ExtResource("4_e70y6")
+surface_material_override/0 = ExtResource("5_bbgj6")
+
+[node name="full_view" parent="." instance=ExtResource("6_jen5s")]
+
+[node name="attack_pattern" type="Node3D" parent="full_view"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.0432857, -0.541456)
+
+[node name="highlight_attack" parent="full_view/attack_pattern" instance=ExtResource("7_0kcv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+
+[node name="highlight_attack7" parent="full_view/attack_pattern" instance=ExtResource("7_0kcv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+
+[node name="highlight_attack2" parent="full_view/attack_pattern" instance=ExtResource("7_0kcv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+
+[node name="highlight_attack11" parent="full_view/attack_pattern" instance=ExtResource("7_0kcv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="highlight_attack8" parent="full_view/attack_pattern" instance=ExtResource("7_0kcv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+
+[node name="highlight_attack6" parent="full_view/attack_pattern" instance=ExtResource("7_0kcv8")]
+
+[node name="highlight_attack4" parent="full_view/attack_pattern" instance=ExtResource("7_0kcv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="highlight_attack5" parent="full_view/attack_pattern" instance=ExtResource("7_0kcv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+
+[node name="highlight_attack10" parent="full_view/attack_pattern" instance=ExtResource("7_0kcv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00234985, -0.426)
+shape = SubResource("BoxShape3D_67anj")
