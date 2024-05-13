@@ -19,7 +19,10 @@ mesh = ExtResource("3_b1tpq")
 skeleton = NodePath("../..")
 
 [node name="name_text" parent="." instance=ExtResource("3_yghu0")]
-transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, -0.894221)
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, -0.982618)
 
 [node name="damage_text" parent="." instance=ExtResource("3_yghu0")]
-transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, -0.186953)
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, -0.286694)
+
+[node name="card_text" parent="." instance=ExtResource("3_yghu0")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, -0.00567674)

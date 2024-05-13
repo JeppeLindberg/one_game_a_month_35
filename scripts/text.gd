@@ -13,4 +13,6 @@ func set_text(new_text):
 	if _text_mesh == null:
 		_text_mesh = get_node("mesh")
 	
+	new_text = new_text.replace('\\n', '\n')
+	
 	_text_mesh.mesh.text = new_text

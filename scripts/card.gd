@@ -11,6 +11,7 @@ var _implementation
 
 @export var _name: String
 @export var _command_prefab: PackedScene
+@export var _card_text: String
 
 var damage: int
 var multiplier: int
@@ -19,6 +20,7 @@ var _activated = false
 var _attack_pattern
 var _name_text
 var _damage_text
+var _card_text_node
 var _full_view
 var _small_view
 
@@ -47,6 +49,7 @@ func _ready():
 	_attack_pattern = get_node('full_view/attack_pattern')
 	_name_text = get_node('full_view/name_text')
 	_damage_text = get_node('full_view/damage_text')
+	_card_text_node = get_node('full_view/card_text')
 	_full_view = get_node('full_view')
 	_small_view = get_node('small_view')
 	_implementation = get_node('implementation')
@@ -84,6 +87,7 @@ func _process(delta):
 func _update_visual():
 	_name_text.set_text(_name)	
 	_damage_text.set_text(str(damage) + ' x ' + str(multiplier))
+	_card_text_node.set_text(_card_text)
 
 	var remaning_distance = global_position.distance_to(_target_position)
 	if (remaning_distance < 1) and (_allow_full_view):

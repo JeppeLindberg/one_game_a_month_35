@@ -8,14 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="5_jipv6"]
 [ext_resource type="PackedScene" uid="uid://b48ewt1m2c7qp" path="res://prefabs/parts/card_full_view.tscn" id="6_uef3c"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_67anj"]
-size = Vector3(1, 0.0610962, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_kn46k"]
+size = Vector3(1, 0.0610962, 1.51318)
 
 [node name="3die" type="StaticBody3D"]
 script = ExtResource("1_cs50s")
 _name = "3-Die"
 _command_prefab = ExtResource("2_mnld4")
-_multiplier = 2
 
 [node name="implementation" type="Node3D" parent="."]
 script = ExtResource("3_igsjl")
@@ -30,7 +29,7 @@ surface_material_override/0 = ExtResource("4_5bot6")
 [node name="full_view" parent="." instance=ExtResource("6_uef3c")]
 
 [node name="attack_pattern" type="Node3D" parent="full_view"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.0432857, -0.541456)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.043, -0.638)
 
 [node name="highlight_attack" parent="full_view/attack_pattern" instance=ExtResource("5_jipv6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
@@ -41,5 +40,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 [node name="highlight_attack3" parent="full_view/attack_pattern" instance=ExtResource("5_jipv6")]
 
 [node name="collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00234985, -0.426)
-shape = SubResource("BoxShape3D_67anj")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00234985, -0.427709)
+shape = SubResource("BoxShape3D_kn46k")

@@ -8,6 +8,7 @@ resource_local_to_scene = true
 material = ExtResource("2_wxlv1")
 text = "bla"
 font_size = 24
+line_spacing = -10.0
 depth = 0.01
 
 [node name="text" type="Node3D"]

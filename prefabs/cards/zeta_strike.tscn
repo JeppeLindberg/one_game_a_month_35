@@ -8,14 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://b48ewt1m2c7qp" path="res://prefabs/parts/card_full_view.tscn" id="6_jen5s"]
 [ext_resource type="PackedScene" uid="uid://cnf4hgykiyqlh" path="res://prefabs/visual_effects/attack_highlight.tscn" id="7_0kcv8"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_67anj"]
-size = Vector3(1, 0.0610962, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_6icy2"]
+size = Vector3(1, 0.0610962, 1.51318)
 
 [node name="zeta_strike" type="StaticBody3D"]
 script = ExtResource("1_i2iqq")
 _name = "Zeta Strike"
 _command_prefab = ExtResource("2_s2y28")
-_multiplier = 2
 
 [node name="implementation" type="Node3D" parent="."]
 script = ExtResource("3_r8aio")
@@ -30,7 +29,7 @@ surface_material_override/0 = ExtResource("5_bbgj6")
 [node name="full_view" parent="." instance=ExtResource("6_jen5s")]
 
 [node name="attack_pattern" type="Node3D" parent="full_view"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.0432857, -0.541456)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.0432857, -0.637752)
 
 [node name="highlight_attack" parent="full_view/attack_pattern" instance=ExtResource("7_0kcv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
@@ -59,5 +58,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00234985, -0.426)
-shape = SubResource("BoxShape3D_67anj")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00234985, -0.427709)
+shape = SubResource("BoxShape3D_6icy2")

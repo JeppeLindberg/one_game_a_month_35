@@ -523,7 +523,7 @@ transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, -0.708881,
 script = ExtResource("13_n0s7q")
 
 [node name="hand" type="Node3D" parent="round"]
-transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, 2, 1.8668, 7.18203)
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866026, 0, 0.866026, 0.5, 2, 1.70892, 7.27318)
 script = ExtResource("5_ado8o")
 
 [node name="discard_pile" type="Node3D" parent="round"]
